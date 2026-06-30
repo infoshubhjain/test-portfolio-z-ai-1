@@ -14,49 +14,51 @@ const iconMap: Record<string, any> = {
 
 export default function Leadership() {
   return (
-    <section id="leadership" className="relative py-24 px-4 md:px-10 max-w-7xl mx-auto">
+    <section id="leadership" className="relative py-32 px-4 md:px-10 max-w-7xl mx-auto">
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center mb-16"
+        className="text-center mb-20"
       >
-        <h2 className="text-4xl md:text-6xl font-bold mb-4">Leadership & <span className="text-indigo-400">Impact</span></h2>
-        <p className="text-zinc-500 max-w-2xl mx-auto">Engineering leadership extends beyond code. It requires strategic planning, operational execution, and community transformation.</p>
+        <h2 className="text-5xl md:text-7xl font-bold mb-6">Leadership & <span className="bg-gradient-to-r from-indigo-400 to-cyan-400 bg-clip-text text-transparent">Impact</span></h2>
+        <p className="text-zinc-400 max-w-3xl mx-auto text-lg leading-relaxed">Engineering leadership extends beyond code. It requires strategic planning, operational execution, and community transformation.</p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {leadership.map((role, i) => {
           const Icon = iconMap[role.org] || Users;
           return (
             <motion.div
-              key={role.role}
-              initial={{ opacity: 0, y: 30 }}
+              key={`${role.role}-${role.org}`}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="hoverable glass rounded-2xl p-6 hover:bg-white/5 transition-all relative overflow-hidden group"
+              className="hoverable glass rounded-3xl p-8 hover:bg-white/5 transition-all duration-300 relative overflow-hidden group border border-indigo-500/10 hover:border-indigo-500/30"
             >
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-indigo-600/10 rounded-full blur-2xl group-hover:bg-indigo-600/20 transition-all"></div>
+              <div className="absolute -top-16 -right-16 w-40 h-40 bg-gradient-to-br from-indigo-500/10 to-cyan-500/10 rounded-full blur-3xl group-hover:from-indigo-500/20 group-hover:to-cyan-500/20 transition-all duration-500"></div>
               
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-12 h-12 rounded-xl bg-indigo-500/10 flex items-center justify-center border border-indigo-500/20">
-                  <Icon className="text-indigo-400" size={20} />
+              <div className="relative">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-cyan-500/10 flex items-center justify-center border border-indigo-500/20">
+                    <Icon className="text-indigo-400" size={24} />
+                  </div>
+                  <span className="text-xs text-zinc-500 font-medium px-3 py-1 rounded-full bg-white/5">{role.timeline}</span>
                 </div>
-                <span className="text-xs text-zinc-500">{role.timeline}</span>
+
+                <h3 className="text-xl font-bold mb-2 text-white">{role.role}</h3>
+                <p className="text-sm text-indigo-400 mb-6 font-semibold">{role.org}</p>
+
+                <ul className="space-y-3">
+                  {role.points.map((point, idx) => (
+                    <li key={idx} className="text-sm text-zinc-300 flex items-start gap-3 leading-relaxed">
+                      <span className="mt-2 w-1.5 h-1.5 rounded-full bg-gradient-to-r from-indigo-400 to-cyan-400 flex-shrink-0" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
-
-              <h3 className="text-lg font-bold mb-1">{role.role}</h3>
-              <p className="text-sm text-indigo-400 mb-4">{role.org}</p>
-
-              <ul className="space-y-2">
-                {role.points.map((point, idx) => (
-                  <li key={idx} className="text-sm text-zinc-400 flex items-start gap-2">
-                    <span className="mt-1.5 w-1 h-1 rounded-full bg-indigo-400 flex-shrink-0" />
-                    {point}
-                  </li>
-                ))}
-              </ul>
             </motion.div>
           );
         })}
